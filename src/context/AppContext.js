@@ -4,12 +4,12 @@ import React, { createContext, useReducer } from 'react';
 export const AppReducer = (state, action) => {
     let new_expenses = [];
     switch (action.type) {
-        case 'ADD_QUANTITY':
-            let updatedqty = false;
+        case 'ADD_ALLOC':
+            // let updatedqty = false;
             state.expenses.map((expense)=>{
                 if(expense.name === action.payload.name) {
-                    expense.quantity = expense.quantity + action.payload.quantity;
-                    updatedqty = true;
+                    expense.budgetAlloc = expense.budgetAlloc + action.payload.budgetAlloc;
+                    // updatedqty = true;
                 }
                 new_expenses.push(expense);
                 return true;
@@ -62,13 +62,17 @@ export const AppReducer = (state, action) => {
 // 1. Sets the initial state when the app loads
 const initialState = {
     expenses: [
-        { id: "Marketing", name: 'Marketing', quantity: 0, unitprice: 5 },
-        { id: "Finance", name: 'Finance', quantity: 0, unitprice: 3 },
-        { id: "Sales", name: 'Sales', quantity: 0, unitprice: 4 },
-        { id: "Human Resources", name: 'Human Resources', quantity: 0, unitprice: 6 },
-        { id: "IT", name: 'IT', quantity: 0, unitprice: 2 },
+        { id: "Marketing", name: 'Marketing', budgetAlloc: 11},
+        { id: "Finance", name: 'Finance', budgetAlloc: 22},
+        { id: "Sales", name: 'Sales', budgetAlloc: 33},
+        { id: "Human Resources", name: 'Human Resources', budgetAlloc: 44},
+        { id: "IT", name: 'IT', budgetAlloc: 55},
     ],
-    Location: '£'
+    Location: '£',
+    budgety: 1000,
+    budget: 88,
+    expenses: 888
+
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -83,13 +87,17 @@ export const AppProvider = (props) => {
     const totalExpenses = state.expenses.reduce((total, item) => {
         return (total = total + (item.unitprice*item.quantity));
     }, 0);
-state.CartValue = totalExpenses;
+state.BudgetScenario = totalExpenses;
 
     return (
         <AppContext.Provider
             value={{
-                expenses: state.expenses,
-                CartValue: state.CartValue,
+                budget: 99,
+                expenses: 999,
+                budgetAlloc: 9999,
+                // expenses: state.expenses,
+                // budget: state.budget,
+                budgety: state.budgety,
                 dispatch,
                 Location: state.Location
             }}
