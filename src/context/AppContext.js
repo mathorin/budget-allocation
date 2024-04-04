@@ -71,7 +71,7 @@ const initialState = {
     Location: '£',
     budgety: 1000,
     budget: 88,
-    expenses: 888
+    // expenses: 888
 
 };
 
@@ -93,8 +93,7 @@ state.BudgetScenario = totalExpenses;
         <AppContext.Provider
             value={{
                 budget: 99,
-                expenses: 999,
-                budgetAlloc: 9999,
+                expenses: state.expenses.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0),
                 // expenses: state.expenses,
                 // budget: state.budget,
                 budgety: state.budgety,
