@@ -13,7 +13,6 @@ const BudgetOverview = () => {
 
     return (
         <div className='alert alert-primary'>
-            {/* <span>Budget: {Location}{totalBudget} My budget: {budget}</span> */}
             <p>
                 <span>Budget:{Location}
                     <input 
@@ -32,7 +31,7 @@ const BudgetOverview = () => {
             <p>Expenses: {expenses}</p>
             <p></p>
             <p><span>Remaining: calculated based on changes to budget or spending {budget - expenses}</span></p>
-            <p><span>Spent so far(Allocated): adjusts with changes in form</span></p>
+            <p><span>Spent so far(Allocated expenses):{expenses} adjusts with changes in form</span></p>
         </div>
     );
 };
