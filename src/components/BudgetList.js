@@ -3,7 +3,7 @@ import BudgetItem from './BudgetItem';
 import { AppContext } from '../context/AppContext';
 
 const BudgetList = () => {
-    const { expenses } = useContext(AppContext);
+    const { expense } = useContext(AppContext);
 
     return (
         <>
@@ -19,9 +19,10 @@ const BudgetList = () => {
             </tr>
           </thead>
             <tbody>
-            {/* {expenses.map((expense) => (
-                <BudgetItem id={expense.id} key={expense.id} name={expense.name} budgetAlloc={expense.budgetAlloc} unitprice={expense.unitprice} />
-            ))} */}
+                {/* {console.log(expense)} */}
+            {expense.map((exp) => (
+                <BudgetItem id={exp.id} key={exp.id} name={exp.name} budgetAlloc={exp.budgetAlloc} unitprice={exp.unitprice} />
+            ))}
             </tbody>
         </table>
         </>
