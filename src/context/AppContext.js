@@ -6,10 +6,10 @@ export const AppReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ALLOC':
             // let updatedqty = false;
+            // alert("ADD_ALLOC in AppContext called!")
             state.expenses.map((expense)=>{
                 if(expense.name === action.payload.name) {
-                    expense.budgetAlloc = expense.budgetAlloc + action.payload.budgetAlloc;
-                    // updatedqty = true;
+                    expense.budgetAlloc = expense.budgetAlloc + 10;
                 }
                 new_expenses.push(expense);
                 return true;
@@ -20,12 +20,12 @@ export const AppReducer = (state, action) => {
                 ...state,
             };
 
-            case 'RED_QUANTITY':
+            case 'RED_ALLOC':
                 state.expenses.map((expense)=>{
                     if(expense.name === action.payload.name) {
-                        expense.quantity = expense.quantity - action.payload.quantity;
+                        expense.budgetAlloc = expense.budgetAlloc - action.payload.quantity;
                     }
-                    expense.quantity = expense.quantity < 0 ? 0: expense.quantity;
+                    expense.budgetAlloc = expense.budgetAlloc < 0 ? 0: expense.budgetAlloc;
                     new_expenses.push(expense);
                     return true;
                 })
@@ -62,7 +62,7 @@ export const AppReducer = (state, action) => {
 // 1. Sets the initial state when the app loads
 const initialState = {
     expenses: [
-        { id: "Marketing", name: 'Marketing', budgetAlloc: 11},
+        { id: "Marketing", name: 'Marketing', budgetAlloc: 40},
         { id: "Finance", name: 'Finance', budgetAlloc: 22},
         { id: "Sales", name: 'Sales', budgetAlloc: 33},
         { id: "Human Resources", name: 'Human Resources', budgetAlloc: 44},
@@ -93,7 +93,8 @@ state.BudgetScenario = totalExpenses;
         <AppContext.Provider
             value={{
                 budget: 99,
-                expenses: state.expenses.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0),
+                expense: state.expenses.map((obj) => obj), 
+                // expenses: state.expenses.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0),
                 // expenses: state.expenses,
                 // budget: state.budget,
                 budgety: state.budgety,
