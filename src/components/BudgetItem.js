@@ -16,13 +16,26 @@ const BudgetItem = (props) => {
         });
     };
 
+    const handleAddTen = () => {
+        const item = {
+            name: props.name,
+        }
+        dispatch({
+            type: 'ADD_ALLOC',
+            payload: props,
+        })
+    }
+
+
+
+
 
     return (
         <tr>
         <td>{props.name}</td>
         <td>{props.budgetAlloc}</td>
-        <td>{Location}{parseInt(props.unitprice)}</td>
-        <td>{Location}{parseInt(props.budgetAlloc)*parseInt(props.unitprice)}</td>
+        <td>{<button onClick={handleAddTen}>+10</button>}</td>
+        <td>{props.budgetAlloc - 10}</td>
         <td><FaTimesCircle size='2.2em' color="red" onClick={handleDeleteItem}></FaTimesCircle></td>
         </tr>
     );
