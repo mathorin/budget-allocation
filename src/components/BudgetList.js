@@ -19,9 +19,9 @@ const BudgetList = () => {
             </tr>
           </thead>
             <tbody>
-            {expenses.map((expense) => (
+            {/* {expenses.map((expense) => (
                 <BudgetItem id={expense.id} key={expense.id} name={expense.name} budgetAlloc={expense.budgetAlloc} unitprice={expense.unitprice} />
-            ))}
+            ))} */}
             </tbody>
         </table>
         </>
