@@ -3,13 +3,16 @@ import { AppContext } from '../context/AppContext';
 
 const BudgetOverview = () => {
     // removed budget from here, will want to add back and use useContext
-    const { expenses, Location, budgety } = useContext(AppContext);
+    const { expense, Location, budget } = useContext(AppContext);
     
-    // const totalExpenses = expenses.reduce((total, item) => {
-    // return (total += (item.unitprice * item.quantity));
-    // }, 0);
+    const totalExpenses = expense.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0)
 
-    const [budget, setBudget] = useState('0');
+    const handleClick = () => {
+        alert('Budget is '+ budget + ' dollars')
+
+    }
+
+    // const [budget, setBudget] = useState('0');
 
     return (
         <div className='alert alert-primary'>
@@ -21,17 +24,20 @@ const BudgetOverview = () => {
                         step='10' 
                         max={20000}
                         min={0}
-                        onChange={e => setBudget(e.target.value)}
+                        // onChange={e => 'setBudget(e.target.value)}
                         >
                     </input>
                 </span>
             </p>
             {/* <span>Budget: {Location}{totalBudget}</span> */}
             {/* <p>Budget: {budget}</p> */}
-            <p>Expenses: {expenses}</p>
+
+
+            <p>Expenses: {totalExpenses}</p>
             <p></p>
-            <p><span>Remaining: calculated based on changes to budget or spending {budget - expenses}</span></p>
-            <p><span>Spent so far(Allocated expenses):{expenses} adjusts with changes in form</span></p>
+            <p><span>Remaining: calculated based on changes to budget or spending {budget - totalExpenses}</span></p>
+            <button onClick={handleClick}>test</button>
+            {/* <p><span>Spent so far(Allocated expenses):{expense} adjusts with changes in form</span></p> */}
         </div>
     );
 };
