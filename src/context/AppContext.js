@@ -4,6 +4,16 @@ import React, { createContext, useReducer } from 'react';
 export const AppReducer = (state, action) => {
     let new_expenses = [];
     switch (action.type) {
+        case 'UPDATE_BUDGET':
+            console.log('Payload is: ' + action.payload)
+            console.log('State budget was: ' + state.budget);
+            state.budget = action.payload
+            console.log('State budget now is: ' + state.budget);
+            action.type = "DONE";
+        return {
+            ...state
+        }
+
         case 'ADD_ALLOC':
             // let updatedqty = false;
             // alert("ADD_ALLOC in AppContext called!")
@@ -69,10 +79,7 @@ const initialState = {
         { id: "IT", name: 'IT', budgetAlloc: 55},
     ],
     Location: '£',
-    budgety: 1000,
-    budget: 88,
-    // expenses: 888
-
+    budget: 1000,
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -92,12 +99,11 @@ state.BudgetScenario = totalExpenses;
     return (
         <AppContext.Provider
             value={{
-                budget: 99,
+                budget: state.budget,
                 expense: state.expenses.map((obj) => obj), 
                 // expenses: state.expenses.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0),
                 // expenses: state.expenses,
                 // budget: state.budget,
-                budgety: state.budgety,
                 dispatch,
                 Location: state.Location
             }}
