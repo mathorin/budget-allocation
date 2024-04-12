@@ -3,13 +3,22 @@ import { AppContext } from '../context/AppContext';
 
 const BudgetOverview = () => {
     // removed budget from here, will want to add back and use useContext
-    const { expense, Location, budget } = useContext(AppContext);
+    const { expense, Location, budget, dispatch } = useContext(AppContext);
     
     const totalExpenses = expense.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0)
 
     const handleClick = () => {
         alert('Budget is '+ budget + ' dollars')
 
+    }
+
+    const setBudget = (e) => {
+        // console.log(e)
+        dispatch({
+            type: 'UPDATE_BUDGET',
+            payload: e,
+        });
+        console.log('Budget after setBudget runs is showing as ' + budget)
     }
 
     // const [budget, setBudget] = useState('0');
@@ -24,7 +33,7 @@ const BudgetOverview = () => {
                         step='10' 
                         max={20000}
                         min={0}
-                        // onChange={e => 'setBudget(e.target.value)}
+                        onChange={e => setBudget(e.target.value)}
                         >
                     </input>
                 </span>
