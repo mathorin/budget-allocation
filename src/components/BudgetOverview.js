@@ -18,7 +18,7 @@ const BudgetOverview = () => {
             type: 'UPDATE_BUDGET',
             payload: e,
         });
-        console.log('Budget after setBudget runs is showing as ' + budget)
+        // console.log('Budget after setBudget runs is showing as ' + budget)
     }
 
     // const [budget, setBudget] = useState('0');
@@ -26,9 +26,9 @@ const BudgetOverview = () => {
     return (
         <div className='alert alert-primary'>
             <p>
-                <span>Budget:{Location}
+                <span>Budget: {Location + ' '}
                     <input 
-                        placeholder='Enter your budget' 
+                        placeholder={budget} 
                         type='number'
                         step='10' 
                         max={20000}
@@ -42,9 +42,9 @@ const BudgetOverview = () => {
             {/* <p>Budget: {budget}</p> */}
 
 
-            <p>Expenses: {totalExpenses}</p>
+            <p>Expenses: {Location} {totalExpenses}</p>
             <p></p>
-            <p><span>Remaining: calculated based on changes to budget or spending {budget - totalExpenses}</span></p>
+            <p><span>Remaining: {Location} {budget - totalExpenses}</span></p>
             <button onClick={handleClick}>test</button>
             {/* <p><span>Spent so far(Allocated expenses):{expense} adjusts with changes in form</span></p> */}
         </div>
