@@ -33,7 +33,7 @@ export const AppReducer = (state, action) => {
             case 'RED_ALLOC':
                 state.expenses.map((expense)=>{
                     if(expense.name === action.payload.name) {
-                        expense.budgetAlloc = expense.budgetAlloc - action.payload.quantity;
+                        expense.budgetAlloc = expense.budgetAlloc - 10;
                     }
                     expense.budgetAlloc = expense.budgetAlloc < 0 ? 0: expense.budgetAlloc;
                     new_expenses.push(expense);
@@ -46,8 +46,10 @@ export const AppReducer = (state, action) => {
                 };
         case 'DELETE_ITEM':
             state.expenses.map((expense)=>{
+                console.log(`Expense.name is ${expense.name} and action.payload.name is ${action.payload.name}`)
                 if(expense.name === action.payload.name) {
-                    expense.quantity = 0;
+                    console.log('Delete_item if statement ran in appContext')
+                    expense.budgetAlloc = 0;
                 }
                 new_expenses.push(expense);
                 return true;
@@ -73,10 +75,10 @@ export const AppReducer = (state, action) => {
 const initialState = {
     expenses: [
         { id: "Marketing", name: 'Marketing', budgetAlloc: 40},
-        { id: "Finance", name: 'Finance', budgetAlloc: 22},
-        { id: "Sales", name: 'Sales', budgetAlloc: 33},
-        { id: "Human Resources", name: 'Human Resources', budgetAlloc: 44},
-        { id: "IT", name: 'IT', budgetAlloc: 55},
+        { id: "Finance", name: 'Finance', budgetAlloc: 20},
+        { id: "Sales", name: 'Sales', budgetAlloc: 30},
+        { id: "Human Resources", name: 'Human Resources', budgetAlloc: 40},
+        { id: "IT", name: 'IT', budgetAlloc: 50},
     ],
     Location: '£',
     budget: 1000,
