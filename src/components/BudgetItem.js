@@ -42,7 +42,7 @@ const BudgetItem = (props) => {
         <td>{props.name}</td>
         <td>{Location} {props.budgetAlloc}</td>
         <td>{<FaPlusCircle size ='2.2em' color="green" onClick={handleAddTen}></FaPlusCircle>}</td>
-        <td>{<FaMinusCircle size='2.2em' color="red" onClick={handleReduceTen}></FaMinusCircle>}</td>
+        <td>{<FaMinusCircle size='2.2em' color="maroon" onClick={handleReduceTen}></FaMinusCircle>}</td>
         <td><FaTimesCircle size='1.1em' color="black" onClick={handleDeleteItem}></FaTimesCircle></td>
         </tr>
     );
