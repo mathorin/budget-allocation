@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const BudgetOverview = () => {
-    // removed budget from here, will want to add back and use useContext
     const { expense, Location, budget, dispatch } = useContext(AppContext);
     
     const totalExpenses = expense.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0)
