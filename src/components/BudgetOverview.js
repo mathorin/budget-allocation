@@ -1,53 +1,56 @@
-import React, { useContext, useState } from 'react';
-import { AppContext } from '../context/AppContext';
+import React, { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import LocationForm from "../components/Location.js";
 
 const BudgetOverview = () => {
-    const { expense, Location, budget, dispatch } = useContext(AppContext);
-    
-    const totalExpenses = expense.map((obj) => obj.budgetAlloc).reduce((acc, cv) => acc + cv, 0)
+  const { expense, budget, Location, dispatch } = useContext(AppContext);
 
-    const handleClick = () => {
-        alert('Budget is '+ budget + ' dollars')
+  const totalExpenses = expense
+    .map((obj) => obj.budgetAlloc)
+    .reduce((acc, cv) => acc + cv, 0);
 
-    }
+  const setBudget = (value) => {
+    dispatch({
+      type: "UPDATE_BUDGET",
+      payload: value,
+    });
+  };
 
-    const setBudget = (e) => {
-        // console.log(e)
-        dispatch({
-            type: 'UPDATE_BUDGET',
-            payload: e,
-        });
-        // console.log('Budget after setBudget runs is showing as ' + budget)
-    }
+  return (
+    <div className="row">
+      <span className="alert alert-secondary budget col-md-3">
+        Budget: {Location + " "}
+        <input
+          value={budget}
+          type="number"
+          step="10"
+          max={20000}
+          min={0}
+          onChange={(e) => {
+            if (e.target.value >= totalExpenses) {
+              setBudget(e.target.value);
+            } else {
+              alert(
+                "Expenses cannot exceed budget, increase budget or reduce allocated amounts"
+              );
+            }
+          }}
+        ></input>
+      </span>
 
-    // const [budget, setBudget] = useState('0');
+      <span className="alert alert-success remaining col-md-3">
+        Remaining: {Location} {budget - totalExpenses}
+      </span>
 
-    return (
-        <div className='alert alert-primary'>
-            <p>
-                <span>Budget: {Location + ' '}
-                    <input 
-                        placeholder={budget} 
-                        type='number'
-                        step='10' 
-                        max={20000}
-                        min={0}
-                        onChange={e => setBudget(e.target.value)}
-                        >
-                    </input>
-                </span>
-            </p>
-            {/* <span>Budget: {Location}{totalBudget}</span> */}
-            {/* <p>Budget: {budget}</p> */}
+      <span className="alert alert-primary spent col-md-3">
+        Spent so far: {Location} {totalExpenses}
+      </span>
 
-
-            <p>Expenses: {Location} {totalExpenses}</p>
-            <p></p>
-            <p><span>Remaining: {Location} {budget - totalExpenses}</span></p>
-            <button onClick={handleClick}>test</button>
-            {/* <p><span>Spent so far(Allocated expenses):{expense} adjusts with changes in form</span></p> */}
-        </div>
-    );
+      <span className="alert alert-success col-md-2">
+        <LocationForm></LocationForm>
+      </span>
+    </div>
+  );
 };
 
 export default BudgetOverview;
