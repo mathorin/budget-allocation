@@ -30,7 +30,7 @@ const BudgetItem = (props) => {
   const handleReduceTen = () => {
     const department = {
       name: props.name,
-      amout: 10,
+      amount: 10,
     };
     dispatch({
       type: "RED_ALLOC",

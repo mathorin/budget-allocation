@@ -1,12 +1,18 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
-const DepartmentSelected = (props) => {
-  const { dispatch, Location } = useContext(AppContext);
+const DepartmentSelected = () => {
+  const { dispatch, expense, budget, Location } = useContext(AppContext);
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [action, setAction] = useState("");
+
+  const totalExpenses = expense
+    .map((obj) => obj.budgetAlloc)
+    .reduce((acc, cv) => acc + cv, 0);
+
+  console.log(totalExpenses);
 
   const submitEvent = () => {
     const department = {
@@ -19,6 +25,12 @@ const DepartmentSelected = (props) => {
         type: "RED_ALLOC",
         payload: department,
       });
+    } else if (amount > budget - totalExpenses) {
+      alert(
+        `Your allocation of ${amount} for expenses exceeds your remaining budget of: ${
+          budget - totalExpenses
+        } `
+      );
     } else {
       dispatch({
         type: "ADD_ALLOC",

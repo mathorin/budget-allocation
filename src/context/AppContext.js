@@ -5,18 +5,13 @@ export const AppReducer = (state, action) => {
   let new_expenses = [];
   switch (action.type) {
     case "UPDATE_BUDGET":
-      //   console.log("Payload is: " + action.payload);
-      //   console.log("State budget was: " + state.budget);
       state.budget = action.payload;
-      //   console.log("State budget now is: " + state.budget);
       action.type = "DONE";
       return {
         ...state,
       };
 
     case "ADD_ALLOC":
-      // let updatedqty = false;
-      // alert("ADD_ALLOC in AppContext called!")
       state.expenses.map((expense) => {
         if (expense.name === action.payload.name) {
           expense.budgetAlloc = expense.budgetAlloc + action.payload.amount;

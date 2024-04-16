@@ -27,6 +27,10 @@ const BudgetOverview = () => {
           max={20000}
           min={0}
           onChange={(e) => {
+            if (e.target.value >= e.target.max) {
+              alert("Reached max of: " + e.target.max);
+            }
+
             if (e.target.value >= totalExpenses) {
               setBudget(e.target.value);
             } else {
